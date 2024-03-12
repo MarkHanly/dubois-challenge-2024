@@ -406,7 +406,6 @@ checkScreenWidth();
     display: flex;
     justify-content: center;
     place-items: center;
-    background-color: green;
   }
 
   .step.active {
@@ -432,7 +431,6 @@ checkScreenWidth();
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: purple;
   }
 
   .narrative h1 {
