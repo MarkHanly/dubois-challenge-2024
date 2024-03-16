@@ -100,7 +100,7 @@ let isWideScreen = true;
 
 // Function to check screen width and set isWideScreen accordingly
 function checkScreenWidth() {
-  isWideScreen = window.innerWidth > 700;
+  isWideScreen = window.innerWidth > 768;
 }
 
 // Event listener to check screen width on resize
@@ -113,125 +113,8 @@ checkScreenWidth();
 
 <!-- HTML starts here -->
 <main>
-  <section>
 
-    <div class="container">
-      {#if isWideScreen}
-        <div class="chart">
-          <!-- Chart component goes here -->
-          <div class='sticky'> 
-            <p>This is where the chart goes for wide screens</p>
-            <img src='https://picsum.photos/id/237/200/300' width='100%'>
-          </div>  
-        </div>
-        <div class="text">
-          <!-- Text content goes here -->
-          <div class='steps'>
-
-            <Scrolly bind:value={currentStep}>
-              {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
-              <div class='step' class:active={currentStep===i}>
-                <div class='step-content'>
-                  <p>{text}</p>
-                </div>
-              </div>
-              {/each}
-            </Scrolly>  
-          
-          </div>
-        </div>
-      {:else}
-          <!-- Chart component goes here -->
-          <div class='sticky'> 
-            <p>This is where the chart goes for narrow screens</p>
-            <img src='https://picsum.photos/id/237/200/200' width='100%'>
-          </div>  
-          <!-- Text content goes here -->
-          <div class='steps'>
-
-            <Scrolly bind:value={currentStep}>
-              {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
-              <div class='step' class:active={currentStep===i}>
-                <div class='step-content'>
-                  <p>{text}</p>
-                </div>
-              </div>
-              {/each}
-            </Scrolly>  
-          
-          </div>
-      {/if}
-    </div>
-
-  </section>
-
-  <!-- Actual content  -->
-
-  <section>
-
-    <h1>Challenging racial stereotypes at the turn of the 20th century</h1> 
-    <div class="container">
-      {#if isWideScreen}
-        <div class="chart">
-          <!-- Chart component goes here -->
-          <div class='sticky'> 
-            <figure>
-              <img 
-            alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
-            src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'>
-              <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
-            </figure>
-          </div>  
-        </div>
-        <div class="text">
-          <!-- Text content goes here -->
-          <div class='steps'>
-
-            <Scrolly bind:value={currentStep}>
-              {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
-              <div class='step' class:active={currentStep===i}>
-                <div class='step-content'>
-                  <p>{text}</p>
-                </div>
-              </div>
-              {/each}
-            </Scrolly>  
-          
-          </div>
-        </div>
-      {:else}
-          <!-- Chart component goes here -->
-          <div class='sticky'> 
-            <figure>
-              <img 
-            alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
-            src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'>
-            <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
-            </figure>
-          </div>  
-          <!-- Text content goes here -->
-          <div class='steps'>
-
-            <Scrolly bind:value={currentStep}>
-              {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
-              <div class='step' class:active={currentStep===i}>
-                <div class='step-content'>
-                  <p>{text}</p>
-                </div>
-              </div>
-              {/each}
-            </Scrolly>  
-          
-          </div>
-      {/if}
-    </div>
-
-
-  <!-- This is the chart -->
-  <section> 
-  <div class='sticky'>
-
-    
+    <!-- Experimenting with tweening -->
     <!-- <button on:click={setFoo}>Foo</button>
     <button on:click={setBar}>Bar</button>
     <p> Your values:
@@ -240,107 +123,152 @@ checkScreenWidth();
       {/each}
     </p> -->
 
-  <h1>Illiteracy of African American people compared with that of other nations</h1>  
-  <hr class='new'>
-  <h2>Propotion d'illettrés parmi les Nègres Americans comparée à celle des autres nations</h2>
-  <hr class='new'>
-  <h3>Done by Atlanta University.</h3>
-  <div class="chart-container" bind:clientWidth={width}>
-    <svg {width} {height}>
-      <g transform="translate({margin.left} {margin.top})">
-        <Yaxis {yScale} height={innerHeight} {hoveredData}/>
-        {#each data as d, i} 
-          <rect
-            x=0
-            y={yScale(d.nation)}
-            width={xScale(d.score)}
-            height=35
-            opacity={hoveredData ? (hoveredData === d ? 1 : 0.6) : 1}
-            fill={d.nation === "Negroes, U.S.A." ? '#be0022' : '#006e41'}
-            on:mouseover={() => {
-              hoveredData = d;
-            }}
-            on:focus={() => {
-              hoveredData = d;
-            }}
-            on:mouseleave={() => {
-              hoveredData = "";
-            }}
-            />
-        {/each}
-      </g>
+  <!-- Actual content  -->
 
-    </svg>
-    {#if hoveredData}
-    <Tooltip data={hoveredData} {xScale} {yScale} {margin} />
-  {/if}
-  </div>
+  <section>
 
-  </div>
+    <h1>Challenging racial stereotypes at the turn of the 20th century</h1> 
+    <div class="content">
 
-<div class='steps'>
+      <div class='wide-container'>
+        <div class="chart">
 
-  <Scrolly bind:value={currentStep}>
-    {#each ['a', 'b', 'c'] as text, i}
-    <div class='step' class:active={currentStep===i}>
-      <div class='step-content'>
-        <p>{text}</p>
+            <figure>
+              <img 
+                alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'>
+              <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
+            </figure>
+      
+          </div>
+        </div>
+
+        <div class='overlay'>
+          <div class='steps'>
+  
+            <Scrolly bind:value={currentStep}>
+              {#each ['Test 1', 'Test 2', 'Test 3'] as text, i}
+              <div class='step' class:active={currentStep===i}>
+                <div class='step-content'>
+                  <p>{text}</p>
+                </div>
+              </div>
+              {/each}
+            </Scrolly>  
+            
+          </div>
+        </div>
+  
+      </div>
+    </section>
+
+
+  <!-- This is the chart -->
+  
+  <section> 
+
+    <div class='content'>
+
+      <div class='wide-container'>
+        <div class='chart'>
+
+          <h1>Illiteracy of African American people compared with that of other nations</h1>  
+          <hr class='new'>
+          <h2>Propotion d'illettrés parmi les Nègres Americans comparée à celle des autres nations</h2>
+          <hr class='new'>
+          <h3>Done by Atlanta University.</h3>
+          <div bind:clientWidth={width}>
+            <svg {width} {height}>
+              <g transform="translate({margin.left} {margin.top})">
+                <Yaxis {yScale} height={innerHeight} {hoveredData}/>
+                {#each data as d, i} 
+                  <rect
+                    x=0
+                    y={yScale(d.nation)}
+                    width={xScale(d.score)}
+                    height=35
+                    opacity={hoveredData ? (hoveredData === d ? 1 : 0.6) : 1}
+                    fill={d.nation === "Negroes, U.S.A." ? '#be0022' : '#006e41'}
+                    on:mouseover={() => {
+                      hoveredData = d;
+                    }}
+                    on:focus={() => {
+                      hoveredData = d;
+                    }}
+                    on:mouseleave={() => {
+                      hoveredData = "";
+                    }}
+                    />
+                {/each}
+              </g>
+        
+            </svg>
+            {#if hoveredData}
+            <Tooltip data={hoveredData} {xScale} {yScale} {margin} />
+          {/if}
+          </div>
+        </div>
+      </div>
+
+  
+          <div class='overlay'>
+          <div class='steps'>
+  
+            <Scrolly bind:value={currentStep}>
+              {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
+              <div class='step' class:active={currentStep===i}>
+                <div class='step-content'>
+                  <p>{text}</p>
+                </div>
+              </div>
+              {/each}
+            </Scrolly>  
+            
+          </div>
+        </div>
+    </div>
+  </section> 
+
+
+<!-- The original chart -->
+<section>
+  <div class='content'>
+    
+    <div class='wide-container'>
+      <div class='chart'>
+        <figure class='fig'>
+          <img 
+            width=100%,  
+            alt="The original W.E.B Du Bois chart titled 'Illiteracy of the American Negroes compared with that of other nations.' The chart shows illiteracy rates for 10 population groups, including African Americans of 57%, Romanians (73%) and Swedes (less than 1%)."
+            src='https://tile.loc.gov/storage-services/service/pnp/ppmsca/33900/33909r.jpg'>
+          <figcaption></figcaption>
+        </figure>
       </div>
     </div>
-    {/each}
-  </Scrolly>  
 
+    <div class='overlay'>
+      <div class='steps'>
+
+        <Scrolly bind:value={currentStep}>
+          {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
+          <div class='step' class:active={currentStep===i}>
+            <div class='step-content'>
+              <p>{text}</p>
+            </div>
+          </div>
+          {/each}
+        </Scrolly>  
+        
+      </div>
+    </div>
 </div>
-</section>
+</section> 
 
-
-<section>
-  <div class='sticky'>
-    <figure>
-      <img 
-    alt="The original W.E.B Du Bois chart titled 'Illiteracy of the American Negroes compared with that of other nations.' The chart shows illiteracy rates for 10 population groups, including African Americans of 57%, Romanians (73%) and Swedes (less than 1%)."
-    src='https://tile.loc.gov/storage-services/service/pnp/ppmsca/33900/33909r.jpg'>
-      <figcaption></figcaption>
-    </figure>
-  </div>
-
-  <div class='steps'>
-    <Scrolly bind:value={currentStep}>
-      {#each ['For comparison, here is the original chart created by W.E.B Du Bois and presented at the Paris Exposition Universelle in 1900'] as text, i}
-      <div class='step' class:active={currentStep===i}>
-        <div class='step-content'>
-          <p>{text}</p>
-        </div>
-      </div>
-      {/each}
-    </Scrolly>  
-  </div>
-
-</section>
-
-
-<!-- <section>
-  <div class='sticky'>
-    
-  </div>
-
-  <div class='steps'>
-    <Scrolly bind:value={currentStep}>
-      {#each ['a', 'b', 'c'] as text, i}
-      <div class='step' class:active={currentStep===i}>
-        <div class='step-content'>
-          <p>{text}</p>
-        </div>
-      </div>
-      {/each}
-    </Scrolly>  
-  </div>
-
-</section> -->
 
 </main>
 
 
+<!-- CSS styling from here -->
 
 <style>
 
@@ -361,6 +289,13 @@ checkScreenWidth();
       opacity 300ms ease,
       width 2s ease;
     cursor: pointer;
+  }
+
+  main {
+    position: relative;
+    background-color: #d8cec2;
+    color: #998c7e;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
   }
 
   h1 {
@@ -391,12 +326,7 @@ checkScreenWidth();
     margin: 0 auto;
   }
 
-  main {
-    position: relative;
-    background-color: #d8cec2;
-    color: #998c7e;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-  }
+
 
   .step {
     height: 90vh;
@@ -415,9 +345,7 @@ checkScreenWidth();
   .step-content {
     background-color: #d8cec2;
     opacity: 0.8;
-    border: 1px solid black;
-    padding: 0.75rem 1rem;
-    border-radius: 3px;
+    pointer-events: none;
   }
 
 
@@ -427,32 +355,42 @@ checkScreenWidth();
     pointer-events: none;
   }
 
-  .sticky {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
-
-  .narrative h1 {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    font-size: 2em;
-    font-weight: 600;
-    text-align: center;
-  }
-
 
    /* Responsive containers */
-   .container {
+
+   /* This is the main container; it moves from flex row to flex column on narrow screens */
+   .content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 
-  .chart {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
+  /* This acts as the containing div in wide screen mode */
+  .wide-container { 
+	  position: sticky;
+	  top: 0;
   }
+
+  /* This is the container for visual elements */
+  .chart {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    flex: 1;
+  }
+
+  /* This is the container for the text elements */
+  .overlay {
+    flex: 1;
+    position: relative;
+    opacity: 0.7;
+    text-align: center;
+    padding: 5px;
+    z-index: 2;
+    justify-content: center;
+    place-items: center;
+    pointer-events: none;
+  }
+
   .steps {
     flex: 1;
     margin-right: 20px;
@@ -461,40 +399,26 @@ checkScreenWidth();
     pointer-events: none;
   }
 
-  /* .text {
-      flex: 1;
-      margin-right: 20px;
-      position: relative;
-      z-index: 2;
-      background-color: pink;
-      pointer-events: none;
-    }  */
 
-  @media screen and (min-width: 701px) {
-    .container {
-      flex-direction: row;
+  /* Rules for wider screens */
+  @media (max-width: 700px) {
+
+    .content {
+      flex-direction: column;
     }
 
-    .text {
-      flex: 1;
-      margin-right: 20px;
-      background-color: whitesmoke;
-    }
-
-    .chart {
-      flex: 1;
-      order: -1; /* Move chart to the left */
-    }
+    .step-content {
+    background-color: #d8cec2;
+    opacity: 0.8;
+    border: 1px solid black;
+    padding: 0.75rem 1rem;
+    border-radius: 3px;
+    pointer-events: none;
   }
 
-  .sticky figure {
-      width: 100%;
-      text-align: center;
-      margin: auto;
+
+
   }
 
-  .buffer {
-    height: 1000px;
-  }
 
 </style>
