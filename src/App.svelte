@@ -57,7 +57,7 @@ let margin={
   right: 0
 }
 
-let height = 800;
+let height = 600;
 let width = 700;
 
 $: innerWidth = width - margin.left - margin.right;
@@ -94,20 +94,6 @@ const setFoo = function () {
 
 // Scrollytelling
 let currentStep; 
-
-// Screen width
-let isWideScreen = true;
-
-// Function to check screen width and set isWideScreen accordingly
-function checkScreenWidth() {
-  isWideScreen = window.innerWidth > 768;
-}
-
-// Event listener to check screen width on resize
-window.addEventListener('resize', checkScreenWidth);
-
-// Call checkScreenWidth on component mount
-checkScreenWidth();
 
 </script>
 
@@ -186,7 +172,7 @@ checkScreenWidth();
                     x=0
                     y={yScale(d.nation)}
                     width={xScale(d.score)}
-                    height=35
+                    height=25
                     opacity={hoveredData ? (hoveredData === d ? 1 : 0.6) : 1}
                     fill={d.nation === "Negroes, U.S.A." ? '#be0022' : '#006e41'}
                     on:mouseover={() => {
@@ -211,7 +197,7 @@ checkScreenWidth();
       </div>
 
   
-          <div class='overlay'>
+        <div class='overlay'>
           <div class='steps'>
   
             <Scrolly bind:value={currentStep}>
