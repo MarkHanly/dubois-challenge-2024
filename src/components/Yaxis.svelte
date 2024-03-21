@@ -2,16 +2,14 @@
     export let yScale;
     export let height;
     export let hoveredData;
+    import { fade } from "svelte/transition";
     let nations = yScale.domain();
 </script>
 
-<!--
-  {nation === hoveredData.nation ? 800 : 300}
-  {nation === hoveredData.nation ? '16.5px' : '16px'}
--->
+ 
 <g class='axis-y'>
   {#each nations as nation}
-    <g class='tick'>
+    <g class='tick' in:fade={{delay: nation === "Afro-américain" ? yScale(nation)*6 : yScale(nation)*1.5}} >
      <text
         text-anchor='start'
         font-weight={hoveredData ? (hoveredData.nation === nation ? 900 : 300) : 300}
@@ -37,4 +35,5 @@
   
   
   <style>
+
   </style>

@@ -1,50 +1,8 @@
 <script>
 
-let data = [
-  {
-    "nation": "Romaine",
-    "score": 72.9363
-  },
-  {
-    "nation": "Servie",
-    "score": 72.2908
-  },
-  {
-    "nation": "Russie",
-    "score": 72.2908
-  },
-  {
-    "nation": "Negroes, U.S.A.",
-    "score": 56.8
-  },
-  {
-    "nation": "Hongrie",
-    "score": 55.509
-  },
-  {
-    "nation": "Italie",
-    "score": 43.8909
-  },
-  {
-    "nation": "Autriche",
-    "score": 34.8545
-  },
-  {
-    "nation": "Ireland",
-    "score": 25.1727
-  },
-  {
-    "nation": "France",
-    "score": 12.9091
-  },
-  {
-    "nation": "Suéde",
-    "score": 0.645454
-  }
-];
-
 import { scaleLinear, scaleBand } from "d3-scale";
 import { tweened } from 'svelte/motion'; // see https://connorrothschild.github.io/v4/post/svelte-scrollytelling
+import { data } from "$data/Data.js";
 import Yaxis from "$components/Yaxis.svelte";
 import Tooltip from "$components/Tooltip.svelte";
 import Scrolly from "$components/Scrolly.svelte";
@@ -63,37 +21,46 @@ let width = 700;
 $: innerWidth = width - margin.left - margin.right;
 let innerHeight = height - margin.top - margin.bottom;
 
-// Scales
-$: xScale = scaleLinear()
-      .domain([0, 100])
-      .range([0, innerWidth]);
+// Scrollytelling
+let currentStep; 
+let currentChartStep; 
+let renderedData = data.filter((item) => item.nation !== "Afro-américain");
+$: nations = renderedData.map(item => item.nation);  
 
-let nations = data.map(item => item.nation);     
-let yScale = scaleBand()
+$: {
+
+  if(currentChartStep <1) {
+    // Exclude data point for African Americans
+    renderedData = data.filter((item) => item.nation !== "Afro-américain");    
+    nations = renderedData.map(item => item.nation);  
+    hoveredData = ""; 
+  } else if (currentChartStep == 1) {
+    // Exclude data point for African Americans
+    renderedData = data;
+    nations = renderedData.map(item => item.nation);    
+  } else if (currentChartStep === 2) {
+    // Exclude data point for African Americans
+    hoveredData = renderedData.find(d => d.nation === "Afro-américain");
+  } else if (currentChartStep === 3) {
+    // Exclude data point for African Americans
+    hoveredData = "";
+  }
+}
+
+console.log(renderedData)
+
+// Scales
+$: yScale = scaleBand()
     .domain(nations)
     .range([0, innerHeight])
     .paddingInner(0)
     .paddingOuter(0)
 
+$: xScale = scaleLinear()
+      .domain([0, 100])
+      .range([0, innerWidth]);
+
 let hoveredData; // inialise hovered data
-
-// Tweened values
-const tweenedY = tweened(data.map((d) => 0), {
-  delay: 900,
-  duration: 1000
-});
-
-const setFoo = function () {
-    tweenedY.set(data.map((d) => data.indexOf(d)));
-  };
-
-  const setBar = function () {
-    tweenedY.set(data.map((d) => 0));
-  };
-
-
-// Scrollytelling
-let currentStep; 
 
 </script>
 
@@ -160,21 +127,26 @@ let currentStep;
 
           <h1>Illiteracy of African American people compared with that of other nations</h1>  
           <hr class='new'>
-          <h2>Propotion d'illettrés parmi les Nègres Americans comparée à celle des autres nations</h2>
+          <h2>Propotion d'illettrés parmi les Afro-américain comparée à celle des autres nations</h2>
           <hr class='new'>
           <h3>Done by Atlanta University.</h3>
           <div bind:clientWidth={width}>
             <svg {width} {height}>
               <g transform="translate({margin.left} {margin.top})">
+                {#if currentChartStep <1}
                 <Yaxis {yScale} height={innerHeight} {hoveredData}/>
-                {#each data as d, i} 
+                {/if}
+                {#if currentChartStep >=1}
+                  <Yaxis {yScale} height={innerHeight} {hoveredData}/>
+                {/if}
+                {#each renderedData as d, i} 
                   <rect
                     x=0
                     y={yScale(d.nation)}
                     width={xScale(d.score)}
                     height=25
                     opacity={hoveredData ? (hoveredData === d ? 1 : 0.6) : 1}
-                    fill={d.nation === "Negroes, U.S.A." ? '#be0022' : '#006e41'}
+                    fill={d.nation === "Afro-américain" ? '#be0022' : '#006e41'}
                     on:mouseover={() => {
                       hoveredData = d;
                     }}
@@ -200,9 +172,9 @@ let currentStep;
         <div class='overlay'>
           <div class='steps'>
   
-            <Scrolly bind:value={currentStep}>
-              {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
-              <div class='step' class:active={currentStep===i}>
+            <Scrolly bind:value={currentChartStep}>
+              {#each ['Step 1', 'Step 2', 'Step 3', 'Step 4'] as text, i}
+              <div class='step' class:active={currentChartStep===i}>
                 <div class='step-content'>
                   <p>{text}</p>
                 </div>
@@ -250,6 +222,9 @@ let currentStep;
 </div>
 </section> 
 
+<div class = 'reference-step'>
+  current step: {currentChartStep}
+</div>
 
 </main>
 
@@ -263,7 +238,8 @@ let currentStep;
     user-select: none;
     transition: 
       font-size 300ms ease, 
-      opacity 300ms ease;
+      opacity 300ms ease,
+      y 3s ease;
   }
 
   svg {
@@ -273,7 +249,8 @@ let currentStep;
   rect {
     transition: 
       opacity 300ms ease,
-      width 2s ease;
+      width 600ms ease,
+      y 1s ease;
     cursor: pointer;
   }
 
@@ -281,6 +258,8 @@ let currentStep;
     position: relative;
     background-color: #d8cec2;
     color: #998c7e;
+    padding-left: 20%;
+    padding-right: 20%;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
   }
 
@@ -343,7 +322,7 @@ let currentStep;
 
 
    /* Responsive containers */
-
+  
    /* This is the main container; it moves from flex row to flex column on narrow screens */
    .content {
     display: flex;
@@ -389,6 +368,15 @@ let currentStep;
   /* Rules for wider screens */
   @media (max-width: 700px) {
 
+    main {
+    position: relative;
+    background-color: #d8cec2;
+    color: #998c7e;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  }
+
     .content {
       flex-direction: column;
     }
@@ -406,5 +394,12 @@ let currentStep;
 
   }
 
+.reference-step {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  color: red;
+}
 
 </style>
