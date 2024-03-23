@@ -3,7 +3,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 :root {
   font-family: Avenir, system-ui, -apple-system, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
   font-weight: 400;
 
@@ -16,4 +16,5 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 body {
 	padding: 6px;
+  background-color: #d8cec2;
 }

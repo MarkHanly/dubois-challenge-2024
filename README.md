@@ -1,23 +1,9 @@
-# Svelte for Data Visualization | Starter Template
+# Du Bois Challenge 2024
 
-This is a simple template for creating data visualizations with Svelte. It was primarily created for my upcoming /newline course, "[Better Data Visualizations with Svelte](https://www.newline.co/courses/better-data-visualizations-with-svelte/welcome)."
+This repo comtains the source code for the scrollytelling article deployed at https://markhanly.github.io/dubois-challenge-2024/
 
-It uses [Svelte](https://svelte.dev/) and [D3](https://d3js.org/). The D3 modules most commonly used in data visualization are already installed. 
+This article was developed as part of the 2024 Du Bois Challenge, hosted by the Data Visualisation Society (more inforamtion [here](https://github.com/ajstarks/dubois-data-portraits/blob/master/challenge/2024/README.md)). 
 
-It also includes a simple CSS reset, as existing Svelte templates sometimes have styles that break data visualizations. There is little else added, the template is meant to be barebones.
+This repo uses a template for creating data visualizations with Svelte developed by Connor Rothschild and provided as part of his /newline course, "[Better Data Visualizations with Svelte](https://www.newline.co/courses/better-data-visualizations-with-svelte/welcome)."
 
-## Getting started
-
-### 1. Clone the template
-
-You can clone this template in one of two ways:
-1. Click the green "Use this template" button on GitHub
-2. On the command line, run `npx degit connorrothschild/svelte-visualization-template`
-
-### 2. Install dependencies
-
-Run `npm install` or `pnpm install` to install the dependencies.
-
-### 3. Start the development server
-
-Run `npm run dev` to start the development server.
+The background image for the chart was taken from [Madison Giammaria](https://github.com/Giammaria/Du-Bois-DVS-challenge/blob/main/2024/challenge-07/_artifacts/background.jpg).

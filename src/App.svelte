@@ -1,22 +1,32 @@
 <script>
 
 import { scaleLinear, scaleBand } from "d3-scale";
-import { tweened } from 'svelte/motion'; // see https://connorrothschild.github.io/v4/post/svelte-scrollytelling
 import { data } from "$data/Data.js";
+import Narrative from "$components/Narrative.svelte";
 import Yaxis from "$components/Yaxis.svelte";
 import Tooltip from "$components/Tooltip.svelte";
 import Scrolly from "$components/Scrolly.svelte";
 
- // Margins
+
+// Narrative
+let scene3 = 
+['This chart compares the degree of illiteracy among several populations.', 
+'There is a wide range of illiteracy levels evident. from almost 73% illiteracy among Romanians (Romaine).', 
+'To less than 1% for Swedes (Suéde).Tap or hover on the bars to explore the data.', 
+'Can you guess where the bar lies for African American people on this chart?',
+'In the middle! Just one generation ot from the end of slavery, almost half of all african Americans were literate, equalling or exceeding many old-world immigrant populations.',
+'With this chart, Du Bois was challenging pre-conceptions about African Americans held by Europeans visitng the Paris exposition.'];
+
+// Margins
 let margin={
-  top: 80,
-  bottom: 80,
-  left: 180,
+  top: 40,
+  bottom: 0,
+  left: 150,
   right: 0
 }
 
 let height = 600;
-let width = 700;
+let width = 511;
 
 $: innerWidth = width - margin.left - margin.right;
 let innerHeight = height - margin.top - margin.bottom;
@@ -24,30 +34,46 @@ let innerHeight = height - margin.top - margin.bottom;
 // Scrollytelling
 let currentStep; 
 let currentChartStep; 
-let renderedData = data.filter((item) => item.nation !== "Afro-américain");
+$: renderedData = data.filter((item) => item.nation !== "Afro-Américain");
 $: nations = renderedData.map(item => item.nation);  
+$: hoveredData = "";
 
 $: {
 
-  if(currentChartStep <1) {
+  if(currentChartStep === 0) {
     // Exclude data point for African Americans
-    renderedData = data.filter((item) => item.nation !== "Afro-américain");    
+    renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
+    nations = renderedData.map(item => item.nation);  
+    hoveredData = "";  
+  } else if (currentChartStep === 1) {
+    // Hover on Romaine
+    renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
+    nations = renderedData.map(item => item.nation);  
+    hoveredData = renderedData.find(d => d.nation === "Romaine");
+  } else if (currentChartStep === 2) {
+    // Hover on Suéde
+    renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
+    nations = renderedData.map(item => item.nation);  
+    hoveredData = renderedData.find(d => d.nation === "Suéde");
+  } else if (currentChartStep === 3) {
+    // Hover on Romaine
+    renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
+    nations = renderedData.map(item => item.nation);  
+    hoveredData = "";
+  } else if (currentChartStep === 4) {
+    // Include data point for African Americans
+    renderedData = data;
     nations = renderedData.map(item => item.nation);  
     hoveredData = ""; 
-  } else if (currentChartStep == 1) {
-    // Exclude data point for African Americans
-    renderedData = data;
-    nations = renderedData.map(item => item.nation);    
-  } else if (currentChartStep === 2) {
-    // Exclude data point for African Americans
-    hoveredData = renderedData.find(d => d.nation === "Afro-américain");
-  } else if (currentChartStep === 3) {
-    // Exclude data point for African Americans
-    hoveredData = "";
   }
+  // } else if (currentChartStep === 5) {
+  //   // Exclude data point for African Americans
+  //   renderedData = data;
+  //   nations = renderedData.map(item => item.nation);  
+  // }
 }
 
-console.log(renderedData)
+console.log(nations)
 
 // Scales
 $: yScale = scaleBand()
@@ -57,40 +83,32 @@ $: yScale = scaleBand()
     .paddingOuter(0)
 
 $: xScale = scaleLinear()
-      .domain([0, 100])
+      .domain([0, 80])
       .range([0, innerWidth]);
-
-let hoveredData; // inialise hovered data
 
 </script>
 
 <!-- HTML starts here -->
 <main>
+  
+  <h1>Challenging racial stereotypes at the turn of the 20th century</h1> 
 
-    <!-- Experimenting with tweening -->
-    <!-- <button on:click={setFoo}>Foo</button>
-    <button on:click={setBar}>Bar</button>
-    <p> Your values:
-      {#each $tweenedY as x}
-          {x}
-      {/each}
-    </p> -->
-
+  <Narrative/>
   <!-- Actual content  -->
 
   <section>
 
-    <h1>Challenging racial stereotypes at the turn of the 20th century</h1> 
     <div class="content">
 
       <div class='wide-container'>
-        <div class="chart">
+        <div class="chart" >
 
             <figure>
               <img 
                 alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'>
-              <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'
+                width='100%'>
+                <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
             </figure>
       
           </div>
@@ -119,24 +137,26 @@ let hoveredData; // inialise hovered data
   <!-- This is the chart -->
   
   <section> 
+    <h1>Illiteracy of African American people compared with that of other nations</h1>  
+    <hr class='new'>
+    <h2>Propotion d'illettrés parmi les Afro-Américain comparée à celle des autres nations</h2>
+    <hr class='new'>
+    <h3>Done by Atlanta University.</h3>
 
     <div class='content'>
 
       <div class='wide-container'>
+
         <div class='chart'>
 
-          <h1>Illiteracy of African American people compared with that of other nations</h1>  
-          <hr class='new'>
-          <h2>Propotion d'illettrés parmi les Afro-américain comparée à celle des autres nations</h2>
-          <hr class='new'>
-          <h3>Done by Atlanta University.</h3>
-          <div bind:clientWidth={width}>
+          <div class='chart-container' bind:clientWidth={width}>
             <svg {width} {height}>
               <g transform="translate({margin.left} {margin.top})">
-                {#if currentChartStep <1}
+                {#if currentChartStep <4}
                 <Yaxis {yScale} height={innerHeight} {hoveredData}/>
                 {/if}
-                {#if currentChartStep >=1}
+                <!-- Seems to need this block to force refresh the Y-axis? -->
+                {#if currentChartStep > 4} 
                   <Yaxis {yScale} height={innerHeight} {hoveredData}/>
                 {/if}
                 {#each renderedData as d, i} 
@@ -146,7 +166,7 @@ let hoveredData; // inialise hovered data
                     width={xScale(d.score)}
                     height=25
                     opacity={hoveredData ? (hoveredData === d ? 1 : 0.6) : 1}
-                    fill={d.nation === "Afro-américain" ? '#be0022' : '#006e41'}
+                    fill={d.nation === "Afro-Américain" ? '#be0022' : '#006e41'}
                     on:mouseover={() => {
                       hoveredData = d;
                     }}
@@ -173,7 +193,7 @@ let hoveredData; // inialise hovered data
           <div class='steps'>
   
             <Scrolly bind:value={currentChartStep}>
-              {#each ['Step 1', 'Step 2', 'Step 3', 'Step 4'] as text, i}
+              {#each scene3 as text, i}
               <div class='step' class:active={currentChartStep===i}>
                 <div class='step-content'>
                   <p>{text}</p>
@@ -242,10 +262,6 @@ let hoveredData; // inialise hovered data
       y 3s ease;
   }
 
-  svg {
-    background-color: #d8cec2;
-  }
-
   rect {
     transition: 
       opacity 300ms ease,
@@ -258,14 +274,25 @@ let hoveredData; // inialise hovered data
     position: relative;
     background-color: #d8cec2;
     color: #998c7e;
-    padding-left: 20%;
-    padding-right: 20%;
+    max-width: 868px;
+    margin: auto;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
   }
 
+  .chart-container {
+    background-image: url("https://raw.githubusercontent.com/Giammaria/Du-Bois-DVS-challenge/main/2024/challenge-07/_artifacts/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 600px;
+    max-height: 700px;
+    box-shadow: 1px 1px 30px #998c7e;
+    margin-top: 20px;
+  }
+
   h1 {
-    padding-top: 40px;
-    padding-bottom: 10px;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
     font-size: 1.3em;
     font-weight: 600;
     text-align: center;
@@ -308,8 +335,7 @@ let hoveredData; // inialise hovered data
   }
 
   .step-content {
-    background-color: #d8cec2;
-    opacity: 0.8;
+    opacity: 1;
     pointer-events: none;
   }
 
@@ -327,6 +353,8 @@ let hoveredData; // inialise hovered data
    .content {
     display: flex;
     flex-direction: row;
+    padding: 3px;
+    margin-top: 1rem;
   }
 
   /* This acts as the containing div in wide screen mode */
@@ -341,6 +369,7 @@ let hoveredData; // inialise hovered data
     top: 0;
     z-index: 0;
     flex: 1;
+    /* margin-top: 20px; */
   }
 
   /* This is the container for the text elements */
@@ -358,7 +387,8 @@ let hoveredData; // inialise hovered data
 
   .steps {
     flex: 1;
-    margin-right: 20px;
+    padding: 20px;
+    margin: auto;
     position: relative;
     z-index: 2;
     pointer-events: none;
@@ -372,8 +402,8 @@ let hoveredData; // inialise hovered data
     position: relative;
     background-color: #d8cec2;
     color: #998c7e;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 1px;
+    padding-right: 1px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
   }
 
@@ -383,14 +413,12 @@ let hoveredData; // inialise hovered data
 
     .step-content {
     background-color: #d8cec2;
-    opacity: 0.8;
+    opacity: 1;
     border: 1px solid black;
     padding: 0.75rem 1rem;
     border-radius: 3px;
     pointer-events: none;
   }
-
-
 
   }
 

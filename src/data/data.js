@@ -12,7 +12,7 @@ export const data = [
     "score": 72.2908
   },
   {
-    "nation": "Afro-américain",
+    "nation": "Afro-Américain",
     "score": 56.8
   },
   {
