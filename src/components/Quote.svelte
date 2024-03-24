@@ -18,8 +18,10 @@ to deny the truth of its own statement that "men are created equal." Let us
 not refer to the terrible blasphemy in which slave sympathizing preachers
 proved by Apostle Paul's epistles the holiness of slavery nor to the great
 chivalry of the South which made concubines of our illiterate, helpless mothers.
-This will be too much, and the picture is complete without it. Suffice
-it to say that the century closes in beautiful contrast and from the four
+This will be too much, and the picture is complete without it.
+</p>
+<p>
+Suffice it to say that the century closes in beautiful contrast and from the four
 comers of the Nation Negroes have sent here to the Universal Exposition
 proofs of progress in manhood, womanhood education industry and all the evidences 
 of good citizenship.

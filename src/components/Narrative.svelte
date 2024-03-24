@@ -5,12 +5,34 @@
 <p>
     William Edward Burghardt Du Bois (1868–1963) was an American sociologist, 
     socialist, historian, and Pan-Africanist civil rights activist. 
-    In 1895 he became the first African-American to be awarded a PhD, and four years 
-    later he co-founded the National Association for the Advancement of Colored People (NAACP). 
+    In 1895, he became the first African-American to be awarded a PhD and four years 
+    later he co-founded the National Association for the Advancement of Colored People (NAACP).  
 </p>
-<p> <span style="font-style: bold;">dew-BOYSS</span> and not <span style="font-style: bold;">duh-BWAH</span> so look out for that one, if it happened to me it could happen to you.</p>
-<p>The United States is a hella racist place these days so you can bet your bottom dollar Du Bois grew up with surrounded by some deep rooted old-time racism, being born in 1868 just a five years after the Proclamation of Emancipation.</p>
-<p>Du Bois had no time for this racism or any of it's trappings be it lynchings, Jim Crow laws, or discrimination </p>
+
+<p>
+    Du Bois was a powerful advocate for African American rights, and 
+    in his books and writings he rallied
+    against the prevailing racism and discrimination that Black people 
+    experienced under the Jim Crow laws.
+</p>
+
+<p>
+    Du Bois organised an exhibit for the 1900 Paris Exposition 
+    aiming to showcase the history and condition of Black people 
+    in America. The exhibit comprised hundreds of charts, photographs
+    and maps which illustrated the striking progress achieved by African
+    Americans since emancipation in areas such as education, home-ownership
+    and literacy.
+</p>
+
+<p>
+    The optimism and confidence of the age, and the potential for the 
+    Exhibit to confront racist tropes with the achievements of black 
+    people is reflected in the powerful 
+    passage below, taken from a review of the Exhibit 
+    published in the African American-led newspaper 
+    <span style="font-style: italic;">The Colored American</span>.
+</p>
 
 <style>
 

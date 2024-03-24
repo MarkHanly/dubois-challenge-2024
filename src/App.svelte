@@ -9,13 +9,14 @@ import Scrolly from "$components/Scrolly.svelte";
 import Denouement from "./components/Denouement.svelte";
 import Footer from "./components/Footer.svelte";
 import Quote from "./components/Quote.svelte";
+import Spacer from "./components/Spacer.svelte";
 
 // Narrative
 
 let scene1 = 
-['This photograph was taken by James Purdy in 1907, when Du Bois was 39 years old.', 
+['Here is a photograph of Du Bois taken by James Purdy in 1907, when Du Bois was 39 years old.', 
 'The same age that I am now.', 
-"And I'd be the first to admit that as well as being a visionary intellectual insurrectionist he is a handsome divil."];
+"And I'd be the first to admit that as well as being a scholar and a gentleman he is a handsome divil."];
 
 let scene3 = 
 ['This chart compares the degree of illiteracy among several populations.', 
@@ -23,13 +24,13 @@ let scene3 =
 'To less than 1% for Swedes (Suéde). Tap or hover on the bars to explore the data.', 
 'Can you guess where the bar lies for African American people on this chart?',
 'Seriously, take a moment to stop and think about it.',
-'In the middle—56.8%! Just one generation out from the end of slavery, almost half of all African Americans were literate, equalling or exceeding literacy rates among several old-world immigrant populations.',
+'In the middle—56.8%! Just one generation out from the end of slavery, almost half of all African Americans were literate, equalling or exceeding literacy rates among several European countries.',
 'With this relatively simple data visualisation, Du Bois was challenging the pre-conceived stereotypes about African Americans held by many of the Europeans visiting the Paris exposition.'];
 
 let scene4 = 
 [
   'Here is the original chart, produced by W.E.B. Du Bois in 1900.',
-  'Working at the turn of the century, a time when the field of modern statistics was just starting to gain momentum, Du Bois was already pioneering techniques which have since become data visualisation standards.',
+  'Working at the turn of the century, a time when the field of modern statistics was just starting to gain momentum, Du Bois was already pioneering techniques which are now data visualisation standards.',
   'Notable is the use of a stand-out colour—here red—to emphasise one data point or population and connect that to a broader narrative, a ubiquitous trick in modern media. '
 ];
 
@@ -77,6 +78,11 @@ $: {
     renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
     nations = renderedData.map(item => item.nation);  
     hoveredData = "";
+  } else if (currentChartStep === 4) {
+    // Hover on Romaine
+    renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
+    nations = renderedData.map(item => item.nation);  
+    hoveredData = "";
   } else if (currentChartStep === 5) {
     // Include data point for African Americans
     renderedData = data;
@@ -114,15 +120,16 @@ $: xScale = scaleLinear()
 
 
   <Narrative/>
-
   <Quote/>
+  <Spacer/>
+
 
   <!-- Actual content  -->
 
+
+  <!-- The image of Du Bois -->
   <section>
-
     <div class="content">
-
       <div class='wide-container'>
         <div class="chart" >
             <div class = "image-container">
@@ -156,9 +163,9 @@ $: xScale = scaleLinear()
     </section>
 
 
-    <br>
-    <!-- <p>Let's take a look at one of the charts presnted by Du Bois, at the Paris Exposition in 1900.</p> -->
-
+    <Spacer/>
+    <p>Let's take a look at one of the charts presnted by Du Bois, at the Paris Exposition in 1900.</p>
+    <Spacer/>
   <!-- This is the chart -->
   
   <section> 
@@ -228,6 +235,9 @@ $: xScale = scaleLinear()
     </div>
   </section> 
 
+
+  <Spacer/>
+  <h1>Now let's check out the original</h1>  
 
 <!-- The original chart -->
 <section>
@@ -310,15 +320,14 @@ $: xScale = scaleLinear()
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    max-width: 450px;
+    max-width: 500px;
     max-height: 800px;
     box-shadow: 1px 1px 30px #695a4d;
     margin-top: 20px;
   }
 
   .image-container {
-    max-width: 600px;
-    max-height: 700px;
+    max-width: 500px;
     box-shadow: 1px 1px 30px #695a4d;
     margin-top: 20px;
   }
@@ -426,7 +435,7 @@ $: xScale = scaleLinear()
   }
 
 
-  /* Rules for wider screens */
+  /* Rules for narrower screens */
   @media (max-width: 700px) {
 
     main {
