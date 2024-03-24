@@ -9,21 +9,25 @@ unless that zero multiplies by ten.
 </p>
 <p>
 At the opening of this century the Constitution of the United States was
-still in swaddling clothes the slave trade was in all its vigor and horrors
-of the middle passage and in practically every State in the Union the
-crack of the slave whip might have been heard The great American Constitution, 
-which has been characterized by William Lloyd Garrison as "A Covenant with death 
-and an agreement with hell" had sanctioned forever the ownership of human property and thus
-to deny the truth of its own statement that "men are created equal." Let us
-not refer to the terrible blasphemy in which slave sympathizing preachers
-proved by Apostle Paul's epistles the holiness of slavery nor to the great
-chivalry of the South which made concubines of our illiterate, helpless mothers.
-This will be too much, and the picture is complete without it.
+still in swaddling clothes, the slave trade was in all its vigor and horrors
+of the "middle passage," and in practically every State in the Union the
+crack of the slave whip might have been heard.
+</p> 
+<p>
+The great American Constitution, which has been characterized by 
+William Lloyd Garrison as "A Covenant with death 
+and an agreement with hell" had sanctioned forever the ownership of 
+human property and thus to deny the truth of its own statement that 
+"men are created equal." Let us not refer to the terrible blasphemy in which 
+slave sympathizing preachers proved by Apostle Paul's epistles the holiness 
+of slavery nor to the great chivalry of the South which made concubines 
+of our illiterate, helpless mothers. This will be too much, and the 
+picture is complete without it.
 </p>
 <p>
 Suffice it to say that the century closes in beautiful contrast and from the four
-comers of the Nation Negroes have sent here to the Universal Exposition
-proofs of progress in manhood, womanhood education industry and all the evidences 
+corners of the Nation Negroes have sent here to the Universal Exposition
+proofs of progress in manhood, womanhood, education, industry and all the evidences 
 of good citizenship.
 </p>
 
@@ -31,7 +35,7 @@ of good citizenship.
 
 <div class='quote-ref'>
 
-    —Thomas J. Calloway writing in The Colored American, 3rd November 1900. <a href="https://chroniclingamerica.loc.gov/lccn/sn83027091/1900-11-03/ed-1/seq-2/" target="_blank">The Library of Congress</a>.
+    —Thomas J. Calloway writing in The Colored American, 3rd November 1900. <a href="https://chroniclingamerica.loc.gov/lccn/sn83027091/1900-11-03/ed-1/seq-2/" target="_blank" rel="noreferrer">The Library of Congress</a>.
 
 </div>
 
@@ -39,9 +43,9 @@ of good citizenship.
     .quote {
         font-family: Cambria;
         padding: 20px;
-        width: 90%;
-        margin:auto;
+        width: 80%;
         margin-top: 2rem;
+        margin:auto;
         background-color: #d2c8b3;
         border-left: 4px solid #998c7e;
         font-style: italic;

@@ -4,7 +4,7 @@
     <hr class='new-light'>
     <p>Made by Mark Hanly using Svelte and D3.</p>
     <br>
-    <a href="https://github.com/MarkHanly/dubois-challenge-2024" target="_blank">
+    <a href="https://github.com/MarkHanly/dubois-challenge-2024" target="_blank" rel="noreferrer">
         <img src="https://raw.githubusercontent.com/MarkHanly/dubois-challenge-2024/main/src/images/github-mark.svg" alt="GitHub Logo" width=30px>
     </a>
     <hr class='new-light'>
@@ -19,11 +19,13 @@
 .footer {
     display: flex;
     align-items: center;
+    margin: auto;
     margin-top: 100px;
     background-color: #998c7e;
     padding: 1px;
-    width: 99vw;
+    width: 100%;
     height: 200px;
+    box-shadow: 1px 1px 10px #695a4d;
 }
 
 .footer-inner {
