@@ -13,17 +13,18 @@ import Quote from "./components/Quote.svelte";
 // Narrative
 
 let scene1 = 
-['This photograph was taken in 1907, when Du Bois was 39 years old.', 
+['This photograph was taken by James Purdy in 1907, when Du Bois was 39 years old.', 
 'The same age that I am now.', 
-"And I'd be the first to admit he is a handsome divil, with a sick smig and moustache thing going on"];
+"And I'd be the first to admit that as well as being a visionary intellectual insurrectionist he is a handsome divil."];
 
 let scene3 = 
 ['This chart compares the degree of illiteracy among several populations.', 
 'There is a wide range of illiteracy levels evident. from almost 73% illiteracy among Romanians (Romaine).', 
 'To less than 1% for Swedes (Suéde). Tap or hover on the bars to explore the data.', 
 'Can you guess where the bar lies for African American people on this chart?',
+'Seriously, take a moment to stop and think about it.',
 'In the middle—56.8%! Just one generation out from the end of slavery, almost half of all African Americans were literate, equalling or exceeding literacy rates among several old-world immigrant populations.',
-'With this chart, Du Bois was challenging the pre-conceived stereotypes about African Americans held by many of the Europeans visiting the Paris exposition.'];
+'With this relatively simple data visualisation, Du Bois was challenging the pre-conceived stereotypes about African Americans held by many of the Europeans visiting the Paris exposition.'];
 
 let scene4 = 
 [
@@ -41,7 +42,7 @@ let margin={
   right: 0
 }
 
-let height = 600;
+let height = 640;
 let width = 510;
 
 $: innerWidth = width - margin.left - margin.right;
@@ -76,12 +77,12 @@ $: {
     renderedData = data.filter((item) => item.nation !== "Afro-Américain");    
     nations = renderedData.map(item => item.nation);  
     hoveredData = "";
-  } else if (currentChartStep === 4) {
+  } else if (currentChartStep === 5) {
     // Include data point for African Americans
     renderedData = data;
     nations = renderedData.map(item => item.nation);  
     hoveredData = renderedData.find(d => d.nation === "Afro-Américain"); 
-  } else if (currentChartStep === 5) {
+  } else if (currentChartStep === 6) {
     // Include data point for African Americans
     renderedData = data;
     nations = renderedData.map(item => item.nation);  
@@ -128,9 +129,8 @@ $: xScale = scaleLinear()
             <figure> 
               <img 
                 alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'
+                src='./src/images/W.E.B._Du_Bois_by_James_E._Purdy,_1907_(cropped).jpg'
                 width='100%'>
-                <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
             </figure>
           </div>
           </div>
@@ -156,29 +156,28 @@ $: xScale = scaleLinear()
     </section>
 
 
+    <br>
+    <!-- <p>Let's take a look at one of the charts presnted by Du Bois, at the Paris Exposition in 1900.</p> -->
+
   <!-- This is the chart -->
   
   <section> 
-
     <h1>Illiteracy of African American people compared with that of other nations</h1>  
     <hr class='new'>
     <h2>Propotion d'illettrés parmi les Afro-Américain comparée à celle des autres nations</h2>
     <hr class='new'>
     <h3>Done by Atlanta University.</h3>
-
     <div class='content'>
       <div class='wide-container'>
-
         <div class='chart'>
-
           <div class='chart-container' bind:clientWidth={width}>
             <svg {width} {height}>
               <g transform="translate({margin.left} {margin.top})">
-                {#if currentChartStep <4}
+                {#if currentChartStep <5}
                 <Yaxis {yScale} height={innerHeight} {hoveredData}/>
                 {/if}
                 <!-- Seems to need this block to force refresh the Y-axis? -->
-                {#if currentChartStep >= 4} 
+                {#if currentChartStep >= 5} 
                   <Yaxis {yScale} height={innerHeight} {hoveredData}/>
                 {/if}
                 {#each renderedData as d, i} 
@@ -311,8 +310,8 @@ $: xScale = scaleLinear()
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    max-width: 600px;
-    max-height: 700px;
+    max-width: 450px;
+    max-height: 800px;
     box-shadow: 1px 1px 30px #695a4d;
     margin-top: 20px;
   }
@@ -367,10 +366,8 @@ $: xScale = scaleLinear()
   }
 
   .step-content {
-    opacity: 1;
     pointer-events: none;
   }
-
 
   .steps {
     position: relative;
@@ -453,11 +450,18 @@ $: xScale = scaleLinear()
     pointer-events: none;
   }
 
+  .chart-container {
+    background-image: url("https://raw.githubusercontent.com/Giammaria/Du-Bois-DVS-challenge/main/2024/challenge-07/_artifacts/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 900px;
+    max-height: 700px;
+    box-shadow: 1px 1px 30px #695a4d;
+    margin-top: 20px;
   }
 
-.clickable {
-  pointer-events: auto;
-}
+  }
 
 .reference-step {
   position: fixed;

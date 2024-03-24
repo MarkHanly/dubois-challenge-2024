@@ -5,7 +5,7 @@
     <p>Made by Mark Hanly using Svelte and D3.</p>
     <br>
     <a href="https://github.com/MarkHanly/dubois-challenge-2024" target="_blank">
-        <img src="src/images/github-mark.svg" alt="GitHub Logo" width=30px>
+        <img src="https://raw.githubusercontent.com/MarkHanly/dubois-challenge-2024/main/src/images/github-mark.svg" alt="GitHub Logo" width=30px>
     </a>
     <hr class='new-light'>
 </div>
