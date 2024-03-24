@@ -11,17 +11,17 @@
 
 <p>
     Du Bois was a powerful advocate for African American rights, and 
-    in his books and writings he rallied
+    in his books and writings he railed
     against the prevailing racism and discrimination that Black people 
     experienced under the Jim Crow laws.
 </p>
 
 <p>
     Du Bois organised an exhibit for the 1900 Paris Exposition 
-    aiming to showcase the history and condition of Black people 
+    aiming to showcase the history and conditions of Black people 
     in America. The exhibit comprised hundreds of charts, photographs
     and maps which illustrated the striking progress achieved by African
-    Americans since emancipation in areas such as education, home-ownership
+    Americans since emancipation in areas such as education, home ownership
     and literacy.
 </p>
 

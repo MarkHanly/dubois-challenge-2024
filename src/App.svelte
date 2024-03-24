@@ -20,10 +20,10 @@ let scene1 =
 
 let scene3 = 
 ['This chart compares the degree of illiteracy among several populations.', 
-'There is a wide range of illiteracy levels evident. from almost 73% illiteracy among Romanians (Romaine).', 
+'There is a wide range of illiteracy levels evident, from almost 73% illiteracy among Romanians (Romaine).', 
 'To less than 1% for Swedes (Suéde). Tap or hover on the bars to explore the data.', 
-'Can you guess where the bar lies for African American people on this chart?',
-'Seriously, take a moment to stop and think about it.',
+'Considering that slavery had ended with the adoption of the 13th amendment in 1865, thirty-five years previously, where do you think the bar lies for African American people on this chart?',
+"Seriously, take a moment to stop and think about it. That's only about the same span of time between 2024 and when The Pixies released Doolittle. I saw them play last year!",
 'In the middle—56.8%! Just one generation out from the end of slavery, almost half of all African Americans were literate, equalling or exceeding literacy rates among several European countries.',
 'With this relatively simple data visualisation, Du Bois was challenging the pre-conceived stereotypes about African Americans held by many of the Europeans visiting the Paris exposition.'];
 
@@ -414,7 +414,7 @@ $: xScale = scaleLinear()
   .overlay {
     flex: 1;
     position: relative;
-    opacity: 0.7;
+    opacity: 0.8;
     text-align: center;
     padding: 5px;
     z-index: 2;
@@ -435,7 +435,7 @@ $: xScale = scaleLinear()
   }
 
 
-  /* Rules for narrower screens */
+  /* Rules for wider screens */
   @media (max-width: 700px) {
 
     main {
