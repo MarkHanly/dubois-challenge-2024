@@ -129,7 +129,7 @@ $: xScale = scaleLinear()
             <figure> 
               <img 
                 alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
-                src='./src/images/W.E.B._Du_Bois_by_James_E._Purdy,_1907_(cropped).jpg'
+                src='https://github.com/MarkHanly/dubois-challenge-2024/blob/main/src/images/W.E.B._Du_Bois_by_James_E._Purdy,_1907_(cropped).jpg?raw=true'
                 width='100%'>
             </figure>
           </div>
