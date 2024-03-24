@@ -6,16 +6,32 @@ import Narrative from "$components/Narrative.svelte";
 import Yaxis from "$components/Yaxis.svelte";
 import Tooltip from "$components/Tooltip.svelte";
 import Scrolly from "$components/Scrolly.svelte";
-
+import Denouement from "./components/Denouement.svelte";
+import Footer from "./components/Footer.svelte";
+import Quote from "./components/Quote.svelte";
 
 // Narrative
+
+let scene1 = 
+['This photograph was taken in 1907, when Du Bois was 39 years old.', 
+'The same age that I am now.', 
+"And I'd be the first to admit he is a handsome divil, with a sick smig and moustache thing going on"];
+
 let scene3 = 
 ['This chart compares the degree of illiteracy among several populations.', 
 'There is a wide range of illiteracy levels evident. from almost 73% illiteracy among Romanians (Romaine).', 
-'To less than 1% for Swedes (Suéde).Tap or hover on the bars to explore the data.', 
+'To less than 1% for Swedes (Suéde). Tap or hover on the bars to explore the data.', 
 'Can you guess where the bar lies for African American people on this chart?',
-'In the middle! Just one generation ot from the end of slavery, almost half of all african Americans were literate, equalling or exceeding many old-world immigrant populations.',
-'With this chart, Du Bois was challenging pre-conceptions about African Americans held by Europeans visitng the Paris exposition.'];
+'In the middle—56.8%! Just one generation out from the end of slavery, almost half of all African Americans were literate, equalling or exceeding literacy rates among several old-world immigrant populations.',
+'With this chart, Du Bois was challenging the pre-conceived stereotypes about African Americans held by many of the Europeans visiting the Paris exposition.'];
+
+let scene4 = 
+[
+  'Here is the original chart, produced by W.E.B. Du Bois in 1900.',
+  'Working at the turn of the century, a time when the field of modern statistics was just starting to gain momentum, Du Bois was already pioneering techniques which have since become data visualisation standards.',
+  'Notable is the use of a stand-out colour—here red—to emphasise one data point or population and connect that to a broader narrative, a ubiquitous trick in modern media. '
+];
+
 
 // Margins
 let margin={
@@ -26,7 +42,7 @@ let margin={
 }
 
 let height = 600;
-let width = 511;
+let width = 510;
 
 $: innerWidth = width - margin.left - margin.right;
 let innerHeight = height - margin.top - margin.bottom;
@@ -64,16 +80,14 @@ $: {
     // Include data point for African Americans
     renderedData = data;
     nations = renderedData.map(item => item.nation);  
+    hoveredData = renderedData.find(d => d.nation === "Afro-Américain"); 
+  } else if (currentChartStep === 5) {
+    // Include data point for African Americans
+    renderedData = data;
+    nations = renderedData.map(item => item.nation);  
     hoveredData = ""; 
   }
-  // } else if (currentChartStep === 5) {
-  //   // Exclude data point for African Americans
-  //   renderedData = data;
-  //   nations = renderedData.map(item => item.nation);  
-  // }
 }
-
-console.log(nations)
 
 // Scales
 $: yScale = scaleBand()
@@ -91,9 +105,17 @@ $: xScale = scaleLinear()
 <!-- HTML starts here -->
 <main>
   
-  <h1>Challenging racial stereotypes at the turn of the 20th century</h1> 
+  <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Challenging racial stereotypes at the turn of the 20th century</h1> 
+  <hr class='new'>
+  <h2 style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem;">The story of W.E.B. Du Bois and the 1900 Paris Exposition</h2>
+  <hr class='new'>
+  <br>
+
 
   <Narrative/>
+
+  <Quote/>
+
   <!-- Actual content  -->
 
   <section>
@@ -102,15 +124,15 @@ $: xScale = scaleLinear()
 
       <div class='wide-container'>
         <div class="chart" >
-
-            <figure>
+            <div class = "image-container">
+            <figure> 
               <img 
                 alt="Carte-de-visite of Du Bois, with beard and mustache, around 39 years old"
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg/440px-W.E.B._Du_Bois_by_James_E._Purdy%2C_1907_%28cropped%29.jpg'
                 width='100%'>
                 <figcaption>W.E.B. Du Bois by James E. Purdy, 1907.</figcaption>
             </figure>
-      
+          </div>
           </div>
         </div>
 
@@ -118,7 +140,7 @@ $: xScale = scaleLinear()
           <div class='steps'>
   
             <Scrolly bind:value={currentStep}>
-              {#each ['Test 1', 'Test 2', 'Test 3'] as text, i}
+              {#each scene1 as text, i}
               <div class='step' class:active={currentStep===i}>
                 <div class='step-content'>
                   <p>{text}</p>
@@ -137,6 +159,7 @@ $: xScale = scaleLinear()
   <!-- This is the chart -->
   
   <section> 
+
     <h1>Illiteracy of African American people compared with that of other nations</h1>  
     <hr class='new'>
     <h2>Propotion d'illettrés parmi les Afro-Américain comparée à celle des autres nations</h2>
@@ -144,7 +167,6 @@ $: xScale = scaleLinear()
     <h3>Done by Atlanta University.</h3>
 
     <div class='content'>
-
       <div class='wide-container'>
 
         <div class='chart'>
@@ -156,7 +178,7 @@ $: xScale = scaleLinear()
                 <Yaxis {yScale} height={innerHeight} {hoveredData}/>
                 {/if}
                 <!-- Seems to need this block to force refresh the Y-axis? -->
-                {#if currentChartStep > 4} 
+                {#if currentChartStep >= 4} 
                   <Yaxis {yScale} height={innerHeight} {hoveredData}/>
                 {/if}
                 {#each renderedData as d, i} 
@@ -214,7 +236,8 @@ $: xScale = scaleLinear()
     
     <div class='wide-container'>
       <div class='chart'>
-        <figure class='fig'>
+        <div class = "image-container">
+        <figure>
           <img 
             width=100%,  
             alt="The original W.E.B Du Bois chart titled 'Illiteracy of the American Negroes compared with that of other nations.' The chart shows illiteracy rates for 10 population groups, including African Americans of 57%, Romanians (73%) and Swedes (less than 1%)."
@@ -222,16 +245,17 @@ $: xScale = scaleLinear()
           <figcaption></figcaption>
         </figure>
       </div>
+      </div>
     </div>
 
     <div class='overlay'>
       <div class='steps'>
 
         <Scrolly bind:value={currentStep}>
-          {#each ['Step 1', 'Step 2', 'Step 3'] as text, i}
+          {#each scene4 as text, i}
           <div class='step' class:active={currentStep===i}>
             <div class='step-content'>
-              <p>{text}</p>
+              <p>{@html text}</p>
             </div>
           </div>
           {/each}
@@ -242,19 +266,22 @@ $: xScale = scaleLinear()
 </div>
 </section> 
 
-<div class = 'reference-step'>
+<!-- <div class = 'reference-step'>
   current step: {currentChartStep}
-</div>
+</div> -->
+
+
+<Denouement/>
 
 </main>
-
+<Footer/>
 
 <!-- CSS styling from here -->
 
 <style>
 
 :global(.tick text) {
-    fill: #998c7e;
+    fill: #695a4d;
     user-select: none;
     transition: 
       font-size 300ms ease, 
@@ -273,7 +300,7 @@ $: xScale = scaleLinear()
   main {
     position: relative;
     background-color: #d8cec2;
-    color: #998c7e;
+    color: #695a4d;
     max-width: 868px;
     margin: auto;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
@@ -286,14 +313,21 @@ $: xScale = scaleLinear()
     background-position: center;
     max-width: 600px;
     max-height: 700px;
-    box-shadow: 1px 1px 30px #998c7e;
+    box-shadow: 1px 1px 30px #695a4d;
+    margin-top: 20px;
+  }
+
+  .image-container {
+    max-width: 600px;
+    max-height: 700px;
+    box-shadow: 1px 1px 30px #695a4d;
     margin-top: 20px;
   }
 
   h1 {
     padding-top: 0.5rem;
     padding-bottom: 1rem;
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: 600;
     text-align: center;
   }
@@ -312,18 +346,16 @@ $: xScale = scaleLinear()
   }
 
   hr.new {
-    border: 0.2px solid #998c7e;
+    border: 0.2px solid #695a4d;
     width:20%;
     opacity: 0.3;
     margin: 0 auto;
   }
 
-
-
   .step {
     height: 90vh;
     opacity: 0.3;
-    color:black;
+    color: #695a4d;
     transition: opacity 600ms ease;
     display: flex;
     justify-content: center;
@@ -383,6 +415,8 @@ $: xScale = scaleLinear()
     justify-content: center;
     place-items: center;
     pointer-events: none;
+    max-width: 400px;
+    margin: auto;
   }
 
   .steps {
@@ -401,7 +435,6 @@ $: xScale = scaleLinear()
     main {
     position: relative;
     background-color: #d8cec2;
-    color: #998c7e;
     padding-left: 1px;
     padding-right: 1px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
@@ -414,13 +447,17 @@ $: xScale = scaleLinear()
     .step-content {
     background-color: #d8cec2;
     opacity: 1;
-    border: 1px solid black;
+    border: 1px solid #695a4d;
     padding: 0.75rem 1rem;
-    border-radius: 3px;
+    border-radius: 8px;
     pointer-events: none;
   }
 
   }
+
+.clickable {
+  pointer-events: auto;
+}
 
 .reference-step {
   position: fixed;

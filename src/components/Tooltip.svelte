@@ -3,8 +3,9 @@
     export let xScale; 
     export let yScale;
     export let margin;
+    import { fade } from "svelte/transition";
 
-let lab = Math.round(data.score * 10) / 10;
+$: lab = Math.round(data.score * 10) / 10;
 
 $: nudge = data.nation === "Suéde" || data.nation === "France" || data.nation === "Ireland" ? -5 : 60;
 
@@ -21,6 +22,7 @@ style="
     left: {xPosition}px; 
     top:{yPosition -2}px;
     color: {data.nation === "Suéde" || data.nation === "France" || data.nation === "Ireland" ? "grey" : "#d8cec2"};
+    in:fade={{delay: 200}}
     "
 >
     <p>{lab}%</p>
